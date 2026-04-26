@@ -9,8 +9,6 @@ intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
 
-RED_LINE = "```ansi\n\u001b[0;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m\n```"
-
 def build_payload() -> dict:
     return {
         "flags": 1 << 15,
@@ -22,18 +20,17 @@ def build_payload() -> dict:
                     {
                         "type": 10,
                         "content": (
-                            f"## 𝗣𝗨𝗡𝗜𝗦𝗛𝗠𝗘𝗡𝗧𝗦\n"
-                            f"-# *Every action has a consequence. No exceptions.*\n"
-                            f"{RED_LINE}"
+                            "## 𝗣 𝗨 𝗡 𝗜 𝗦 𝗛 𝗠 𝗘 𝗡 𝗧 𝗦\n"
+                            "-# *Every action has a consequence. No exceptions.*\n"
+                            "-# ◈ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ◈"
                         )
                     },
+                    {"type": 14, "divider": True, "spacing": 1},
                     # ── I. WARNING ───────────────────────
                     {
                         "type": 10,
                         "content": (
-                            "```ansi\n"
-                            "\u001b[2;31m▸  I.  WARNING\u001b[0m\n"
-                            "```"
+                            "**𝐈.  𝗪𝗔𝗥𝗡𝗜𝗡𝗚**\n\n"
                             "A formal written warning issued by staff. "
                             "Warnings are logged and __accumulate__ — "
                             "**three warnings** escalate automatically to a mute."
@@ -44,9 +41,7 @@ def build_payload() -> dict:
                     {
                         "type": 10,
                         "content": (
-                            "```ansi\n"
-                            "\u001b[2;31m▸  II.  MUTE\u001b[0m\n"
-                            "```"
+                            "**𝐈𝐈.  𝗠𝗨𝗧𝗘**\n\n"
                             "Temporary removal of communication privileges. "
                             "Duration is determined by staff based on __severity__ "
                             "and prior history of the offender."
@@ -57,11 +52,9 @@ def build_payload() -> dict:
                     {
                         "type": 10,
                         "content": (
-                            "```ansi\n"
-                            "\u001b[2;31m▸  III.  TEMPORARY BAN\u001b[0m\n"
-                            "```"
-                            "Temporary removal from the server. Applied when a mute has proven "
-                            "__insufficient__ or the offense is of **considerable severity**."
+                            "**𝐈𝐈𝐈.  𝗧𝗘𝗠𝗣𝗢𝗥𝗔𝗥𝗬 𝗕𝗔𝗡**\n\n"
+                            "Temporary removal from the server. Applied when a mute "
+                            "has proven __insufficient__ or the offense is of **considerable severity**."
                         )
                     },
                     {"type": 14, "divider": True, "spacing": 1},
@@ -69,9 +62,7 @@ def build_payload() -> dict:
                     {
                         "type": 10,
                         "content": (
-                            "```ansi\n"
-                            "\u001b[2;31m▸  IV.  PERMANENT BAN\u001b[0m\n"
-                            "```"
+                            "**𝐈𝐕.  𝗣𝗘𝗥𝗠𝗔𝗡𝗘𝗡𝗧 𝗕𝗔𝗡**\n\n"
                             "Permanent removal from the server with __no appeal__. "
                             "Reserved for **severe violations** or repeated offenses "
                             "after all prior sanctions have been exhausted."
@@ -81,7 +72,10 @@ def build_payload() -> dict:
                     # ── Footer ───────────────────────────
                     {
                         "type": 10,
-                        "content": f"{RED_LINE}\n-# Celestials Dragons  ·  Punishments"
+                        "content": (
+                            "-# ◈ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ◈\n"
+                            "-# Celestials Dragons  ·  Punishments"
+                        )
                     }
                 ]
             }
