@@ -76,23 +76,20 @@ PUNISHMENTS_CONTENT = {
 # ─────────────────────────────────────────────
 
 def build_accept_payload() -> dict:
-    """Mensaje inicial con botón Accepted"""
     return {
         "flags": 1 << 15,
         "components": [
             {
                 "type": 17,
-                "accent_color": 0xC0392B,
+                "accent_color": 0x2ECC71,  # verde
                 "components": [
                     {
                         "type": 10,
                         "content": (
-                            "## 𝗣 𝗨 𝗡 𝗜 𝗦 𝗛 𝗠 𝗘 𝗡 𝗧 𝗦\n\n"
                             "By accepting, you acknowledge that you have read and understood "
-                            "the full punishment system of **Celestials Dragons**.\n"
-                            "Violations of clan rules will result in the sanctions described. "
-                            "Ignorance of the rules is __not__ a valid excuse.\n"
-                            "All decisions made by staff are **final and binding**."
+                            "the punishment system of **Celestials Dragons**. "
+                            "Violations will result in the sanctions described — "
+                            "ignorance is __not__ an excuse."
                         )
                     },
                     {"type": 14, "divider": True, "spacing": 1},
@@ -101,7 +98,7 @@ def build_accept_payload() -> dict:
                         "components": [
                             {
                                 "type": 10,
-                                "content": "-# Tap the button to confirm you understand."
+                                "content": "-# Tap to confirm you understand."
                             }
                         ],
                         "accessory": {
@@ -118,21 +115,18 @@ def build_accept_payload() -> dict:
     }
 
 def build_lang_select_payload() -> dict:
-    """Después de aceptar: selector de idioma con botón deshabilitado"""
     return {
         "flags": 1 << 15,
         "components": [
             {
                 "type": 17,
-                "accent_color": 0xC0392B,
+                "accent_color": 0xFFFFFF,  # blanco
                 "components": [
                     {
                         "type": 10,
                         "content": (
-                            "## 𝗣 𝗨 𝗡 𝗜 𝗦 𝗛 𝗠 𝗘 𝗡 𝗧 𝗦\n\n"
-                            "Choose your language to view the full punishment system.\n"
-                            "The content will be sent to you privately.\n\n"
-                            "-# (Updating)"
+                            "Choose your language to view the punishment system.\n"
+                            "-# The content will be sent to you privately."
                         )
                     },
                     {"type": 14, "divider": True, "spacing": 1},
@@ -148,7 +142,7 @@ def build_lang_select_payload() -> dict:
                             "type": 2,
                             "style": 3,
                             "label": "Accepted",
-                            "custom_id": "accept_punishments_done",
+                            "custom_id": "accept_done",
                             "emoji": {"id": "1497991468584014025", "name": "emoji_2"},
                             "disabled": True
                         }
@@ -161,19 +155,19 @@ def build_lang_select_payload() -> dict:
                     {
                         "type": 2,
                         "style": 2,
-                        "label": "English",
+                        "label": "🇬🇧  English",
                         "custom_id": "punish_lang_en"
                     },
                     {
                         "type": 2,
                         "style": 2,
-                        "label": "Español",
+                        "label": "🇦🇷  Español",
                         "custom_id": "punish_lang_es"
                     },
                     {
                         "type": 2,
                         "style": 2,
-                        "label": "Português",
+                        "label": "🇧🇷  Português",
                         "custom_id": "punish_lang_pt"
                     }
                 ]
@@ -182,7 +176,6 @@ def build_lang_select_payload() -> dict:
     }
 
 def build_ephemeral_content(lang: str) -> dict:
-    """Mensaje efímero con el contenido de punishments"""
     return {
         "flags": 64,
         "content": PUNISHMENTS_CONTENT[lang]
@@ -207,7 +200,6 @@ async def send_v2(channel_id: int, payload: dict):
                 print("[OK] Mensaje enviado")
 
 async def update_interaction(interaction_id: str, token: str, payload: dict):
-    """Edita el mensaje original de la interacción"""
     url = f"https://discord.com/api/v10/interactions/{interaction_id}/{token}/callback"
     body = {"type": 7, "data": payload}
     async with aiohttp.ClientSession() as session:
@@ -217,7 +209,6 @@ async def update_interaction(interaction_id: str, token: str, payload: dict):
                 print(f"[ERROR update] {resp.status}: {text}")
 
 async def respond_ephemeral(interaction_id: str, token: str, payload: dict):
-    """Responde con mensaje efímero"""
     url = f"https://discord.com/api/v10/interactions/{interaction_id}/{token}/callback"
     body = {"type": 4, "data": payload}
     async with aiohttp.ClientSession() as session:
@@ -229,10 +220,6 @@ async def respond_ephemeral(interaction_id: str, token: str, payload: dict):
 # ─────────────────────────────────────────────
 #  B O T
 # ─────────────────────────────────────────────
-
-intents = discord.Intents.default()
-intents.message_content = True
-client = discord.Client(intents=intents)
 
 @client.event
 async def on_ready():
@@ -255,7 +242,6 @@ async def on_interaction(interaction: discord.Interaction):
 
     custom_id = interaction.data.get("custom_id", "")
 
-    # Botón Accepted → edita el mensaje y muestra selector de idioma
     if custom_id == "accept_punishments":
         await update_interaction(
             str(interaction.id),
@@ -263,7 +249,6 @@ async def on_interaction(interaction: discord.Interaction):
             build_lang_select_payload()
         )
 
-    # Selector de idioma → manda efímero con el contenido
     elif custom_id in ("punish_lang_en", "punish_lang_es", "punish_lang_pt"):
         lang = custom_id.replace("punish_lang_", "")
         await respond_ephemeral(
