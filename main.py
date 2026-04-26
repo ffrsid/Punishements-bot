@@ -9,7 +9,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
 
-DIV = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+RED_LINE = "```ansi\n\u001b[0;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m\n```"
 
 def build_payload() -> dict:
     return {
@@ -18,15 +18,13 @@ def build_payload() -> dict:
             {
                 "type": 17,
                 "components": [
-                    # ── Portada ──────────────────────────
+                    # ── Header ───────────────────────────
                     {
                         "type": 10,
                         "content": (
-                            "```ansi\n"
-                            "\u001b[1;31mP U N I S H M E N T S\u001b[0m\n"
-                            "```"
-                            f"-# {discord.utils.escape_markdown('Consequence Framework')}  ·  Celestials Dragons\n"
-                            f"```\n{DIV}\n```"
+                            f"## 𝗣𝗨𝗡𝗜𝗦𝗛𝗠𝗘𝗡𝗧𝗦\n"
+                            f"-# *Every action has a consequence. No exceptions.*\n"
+                            f"{RED_LINE}"
                         )
                     },
                     # ── I. WARNING ───────────────────────
@@ -83,10 +81,9 @@ def build_payload() -> dict:
                     # ── Footer ───────────────────────────
                     {
                         "type": 10,
-                        "content": f"-# ◈  *Ignorance of the rules is not an excuse.*  ◈"
+                        "content": f"{RED_LINE}\n-# Celestials Dragons  ·  Punishments"
                     }
-                ],
-                "accent_color": 0x0d0d0d
+                ]
             }
         ]
     }
