@@ -9,78 +9,87 @@ intents = discord.Intents.default()
 intents.message_content = True
 client = discord.Client(intents=intents)
 
-# Color rojo oscuro elegante
-RED = 0xC0392B
+DIV = "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-EMBEDS = [
-    # ── Portada ──────────────────────────────────────────────
-    {
-        "description": (
-            "```ansi\n"
-            "\u001b[0;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m\n"
-            "\u001b[1;31m        P U N I S H M E N T S\u001b[0m\n"
-            "\u001b[0;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m\n"
-            "```"
-            "\n-# *Every action has a consequence. No exceptions.*"
-        ),
-        "color": RED
-    },
-    # ── I. WARNING ───────────────────────────────────────────
-    {
-        "description": (
-            "```ansi\n"
-            "\u001b[1;31m  ▸  I.  W A R N I N G\u001b[0m\n"
-            "```"
-            "\nA formal written warning issued by staff.\n"
-            "Warnings are **logged and accumulate** — three warnings\n"
-            "escalate automatically to a temporary mute.\n\n"
-            "-# ◈ ──────────────────────────── ◈"
-        ),
-        "color": RED
-    },
-    # ── II. MUTE ─────────────────────────────────────────────
-    {
-        "description": (
-            "```ansi\n"
-            "\u001b[1;31m  ▸  II.  M U T E\u001b[0m\n"
-            "```"
-            "\nTemporary removal of communication privileges.\n"
-            "Duration is determined by staff based on **severity**\n"
-            "and prior history of the offender.\n\n"
-            "-# ◈ ──────────────────────────── ◈"
-        ),
-        "color": RED
-    },
-    # ── III. TEMPORARY BAN ───────────────────────────────────
-    {
-        "description": (
-            "```ansi\n"
-            "\u001b[1;31m  ▸  III.  T E M P O R A R Y   B A N\u001b[0m\n"
-            "```"
-            "\nTemporary removal from the server.\n"
-            "Applied when prior sanctions have proven **insufficient**\n"
-            "or the offense is of considerable severity.\n\n"
-            "-# ◈ ──────────────────────────── ◈"
-        ),
-        "color": RED
-    },
-    # ── IV. PERMANENT BAN ────────────────────────────────────
-    {
-        "description": (
-            "```ansi\n"
-            "\u001b[1;31m  ▸  IV.  P E R M A N E N T   B A N\u001b[0m\n"
-            "```"
-            "\nPermanent removal from the server with **no appeal**.\n"
-            "Reserved for severe violations or repeated offenses\n"
-            "after all prior sanctions have been exhausted.\n\n"
-            "```ansi\n"
-            "\u001b[0;31m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m\n"
-            "```"
-            "\n-# Celestials Dragons  ·  Punishments"
-        ),
-        "color": RED
-    },
-]
+def build_payload() -> dict:
+    return {
+        "flags": 1 << 15,
+        "components": [
+            {
+                "type": 17,
+                "components": [
+                    # ── Portada ──────────────────────────
+                    {
+                        "type": 10,
+                        "content": (
+                            "```ansi\n"
+                            "\u001b[1;31mP U N I S H M E N T S\u001b[0m\n"
+                            "```"
+                            f"-# {discord.utils.escape_markdown('Consequence Framework')}  ·  Celestials Dragons\n"
+                            f"```\n{DIV}\n```"
+                        )
+                    },
+                    # ── I. WARNING ───────────────────────
+                    {
+                        "type": 10,
+                        "content": (
+                            "```ansi\n"
+                            "\u001b[2;31m▸  I.  WARNING\u001b[0m\n"
+                            "```"
+                            "A formal written warning issued by staff. "
+                            "Warnings are logged and __accumulate__ — "
+                            "**three warnings** escalate automatically to a mute."
+                        )
+                    },
+                    {"type": 14, "divider": True, "spacing": 1},
+                    # ── II. MUTE ─────────────────────────
+                    {
+                        "type": 10,
+                        "content": (
+                            "```ansi\n"
+                            "\u001b[2;31m▸  II.  MUTE\u001b[0m\n"
+                            "```"
+                            "Temporary removal of communication privileges. "
+                            "Duration is determined by staff based on __severity__ "
+                            "and prior history of the offender."
+                        )
+                    },
+                    {"type": 14, "divider": True, "spacing": 1},
+                    # ── III. TEMPORARY BAN ───────────────
+                    {
+                        "type": 10,
+                        "content": (
+                            "```ansi\n"
+                            "\u001b[2;31m▸  III.  TEMPORARY BAN\u001b[0m\n"
+                            "```"
+                            "Temporary removal from the server. Applied when a mute has proven "
+                            "__insufficient__ or the offense is of **considerable severity**."
+                        )
+                    },
+                    {"type": 14, "divider": True, "spacing": 1},
+                    # ── IV. PERMANENT BAN ────────────────
+                    {
+                        "type": 10,
+                        "content": (
+                            "```ansi\n"
+                            "\u001b[2;31m▸  IV.  PERMANENT BAN\u001b[0m\n"
+                            "```"
+                            "Permanent removal from the server with __no appeal__. "
+                            "Reserved for **severe violations** or repeated offenses "
+                            "after all prior sanctions have been exhausted."
+                        )
+                    },
+                    {"type": 14, "divider": True, "spacing": 1},
+                    # ── Footer ───────────────────────────
+                    {
+                        "type": 10,
+                        "content": f"-# ◈  *Ignorance of the rules is not an excuse.*  ◈"
+                    }
+                ],
+                "accent_color": 0x0d0d0d
+            }
+        ]
+    }
 
 async def send_punishments():
     url = f"https://discord.com/api/v10/channels/{CHANNEL_PUNISHMENTS}/messages"
@@ -89,7 +98,7 @@ async def send_punishments():
         "Content-Type": "application/json"
     }
     async with aiohttp.ClientSession() as session:
-        async with session.post(url, json={"embeds": EMBEDS}, headers=headers) as resp:
+        async with session.post(url, json=build_payload(), headers=headers) as resp:
             if resp.status not in (200, 201):
                 text = await resp.text()
                 print(f"[ERROR] {resp.status}: {text}")
