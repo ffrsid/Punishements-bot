@@ -110,7 +110,7 @@ def build_accept_payload() -> dict:
                     {
                         "type": 10,
                         "content": (
-                            "By accepting, you acknowledge that you have read and understood "
+                            "<:emoji_6:1499837978112036994> By accepting, you acknowledge that you have read and understood "
                             "the punishment system of **Celestials Dragons**. "
                             "Violations will result in the sanctions described — "
                             "ignorance is __not__ an excuse."
@@ -150,7 +150,7 @@ def build_lang_select_payload() -> dict:
                     {
                         "type": 10,
                         "content": (
-                            "Choose your language to view the punishment system.\n"
+                            "<:emoji_7:1499839491534491679> Choose your language to view the punishment system. <:emoji_7:1499839491534491679>\n"
                             "-# The content will be shown below."
                         )
                     },
