@@ -16,8 +16,31 @@ client = discord.Client(intents=intents)
 #  C O N T E N T
 # ─────────────────────────────────────────────
 
+SANCTIONS_HEADER = (
+    "## **CELESTIALS DRAGONS | SANCTIONS SYSTEM**\n"
+    "**All sanctions are applied based on severity and member history**\n\n"
+    "## **WARN SYSTEM**\n"
+    "Minor or moderate offenses result in a warn.\n"
+    "Sanctions increase in severity with each warn.\n"
+    "Reaching 3 warns = temporary blacklist of 1 month.\n"
+    "Regular warns expire after 1 month.\n\n"
+    "## **BLACKLIST**\n"
+    "First blacklist → 1 month duration.\n"
+    "Each new blacklist increases until permanent.\n"
+    "Can be applied without warns if offense is severe.\n\n"
+    "## **STRICT VIOLATIONS**\n"
+    "Leaks / Private information sharing\n"
+    "Doxxing / Sensitive personal data exposure\n"
+    "Grooming / Manipulation toward minors\n"
+    "CP Joking / Child abuse references\n"
+    "Threats / Harassment / Extortion\n\n"
+    "**These result in immediate permanent action. No exceptions.**\n"
+    "***Please review the rules for more information.***\n\n"
+)
+
 PUNISHMENTS_CONTENT = {
     "en": (
+        SANCTIONS_HEADER +
         "**𝐈.  𝗪𝗔𝗥𝗡𝗜𝗡𝗚**\n\n"
         "A formal written warning issued by staff. "
         "Warnings are logged and __accumulate__ — "
@@ -36,6 +59,7 @@ PUNISHMENTS_CONTENT = {
         "-# Celestials Dragons  ·  Punishments"
     ),
     "es": (
+        SANCTIONS_HEADER +
         "**𝐈.  𝗔𝗗𝗩𝗘𝗥𝗧𝗘𝗡𝗖𝗜𝗔**\n\n"
         "Una advertencia formal emitida por el staff. "
         "Las advertencias se registran y __acumulan__ — "
@@ -54,6 +78,7 @@ PUNISHMENTS_CONTENT = {
         "-# Celestials Dragons  ·  Punishments"
     ),
     "pt": (
+        SANCTIONS_HEADER +
         "**𝐈.  𝗔𝗩𝗜𝗦𝗢**\n\n"
         "Um aviso formal emitido pela staff. "
         "Os avisos são registrados e __acumulam__ — "
