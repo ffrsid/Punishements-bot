@@ -139,15 +139,28 @@ def build_accept_payload() -> dict:
     }
 
 
-def build_ephemeral_accepted() -> dict:
-    """Ephemeral: Punishments Accepted + select de idiomas."""
+def build_lang_select_payload() -> dict:
+    """Mensaje del canal después de aceptar: select de idiomas con dropdown."""
     return {
-        "content": (
-            "**Punishments Accepted** — You have acknowledged the punishment system "
-            "of **Celestials Dragons**.\n\n"
-            "Select your language below to view the punishments."
-        ),
+        "flags": 1 << 15,
         "components": [
+            {
+                "type": 17,
+                "components": [
+                    {
+                        "type": 10,
+                        "content": (
+                            "Choose your language to view the punishment system.\n"
+                            "-# The content will be shown below."
+                        )
+                    },
+                    {"type": 14, "divider": True, "spacing": 1},
+                    {
+                        "type": 10,
+                        "content": "-# Select your language below."
+                    }
+                ]
+            },
             {
                 "type": 1,
                 "components": [
@@ -163,31 +176,20 @@ def build_ephemeral_accepted() -> dict:
     }
 
 
-def build_ephemeral_lang_select() -> dict:
-    """Ephemeral: select de idiomas (después de Back)."""
+def build_punishment_payload(lang: str) -> dict:
+    """Mensaje del canal con el contenido de punishments + botón Back azul."""
     return {
-        "content": "Select your language below to view the punishments.",
+        "flags": 1 << 15,
         "components": [
             {
-                "type": 1,
+                "type": 17,
                 "components": [
                     {
-                        "type": 3,
-                        "custom_id": "punish_lang_select",
-                        "placeholder": "Select your language...",
-                        "options": LANG_OPTIONS
+                        "type": 10,
+                        "content": PUNISHMENTS_CONTENT[lang]
                     }
                 ]
-            }
-        ]
-    }
-
-
-def build_ephemeral_punishment(lang: str) -> dict:
-    """Ephemeral: contenido de punishments + botón Back azul."""
-    return {
-        "content": PUNISHMENTS_CONTENT[lang],
-        "components": [
+            },
             {
                 "type": 1,
                 "components": [
@@ -221,10 +223,10 @@ async def send_v2(channel_id: int, payload: dict):
                 print("[OK] Mensaje enviado")
 
 
-async def defer_ephemeral(interaction_id: str, token: str):
-    """Type 5: respuesta ephemeral diferida (muestra 'thinking...' / cargando)."""
+async def defer_update(interaction_id: str, token: str):
+    """Type 6: deferred update (muestra loading en el botón)."""
     url = f"https://discord.com/api/v10/interactions/{interaction_id}/{token}/callback"
-    body = {"type": 5, "data": {"flags": 64}}
+    body = {"type": 6}
     async with aiohttp.ClientSession() as session:
         async with session.post(url, json=body, headers={"Content-Type": "application/json"}) as resp:
             if resp.status not in (200, 201, 204):
@@ -232,14 +234,25 @@ async def defer_ephemeral(interaction_id: str, token: str):
                 print(f"[ERROR defer] {resp.status}: {text}")
 
 
-async def edit_deferred(token: str, payload: dict):
-    """Edita la respuesta diferida via webhook."""
+async def edit_original(token: str, payload: dict):
+    """Edita el mensaje original vía webhook (completa el deferred update)."""
     url = f"https://discord.com/api/v10/webhooks/{APPLICATION_ID}/{token}/messages/@original"
     async with aiohttp.ClientSession() as session:
         async with session.patch(url, json=payload, headers={"Content-Type": "application/json"}) as resp:
             if resp.status not in (200, 201, 204):
                 text = await resp.text()
-                print(f"[ERROR edit_deferred] {resp.status}: {text}")
+                print(f"[ERROR edit_original] {resp.status}: {text}")
+
+
+async def send_followup_ephemeral(token: str, content: str):
+    """Envía un mensaje ephemeral de follow-up (solo lo ve el usuario)."""
+    url = f"https://discord.com/api/v10/webhooks/{APPLICATION_ID}/{token}"
+    payload = {"content": content, "flags": 64}
+    async with aiohttp.ClientSession() as session:
+        async with session.post(url, json=payload, headers={"Content-Type": "application/json"}) as resp:
+            if resp.status not in (200, 201, 204):
+                text = await resp.text()
+                print(f"[ERROR followup] {resp.status}: {text}")
 
 
 async def update_interaction(interaction_id: str, token: str, payload: dict):
@@ -279,30 +292,35 @@ async def on_interaction(interaction: discord.Interaction):
 
     custom_id = interaction.data.get("custom_id", "")
 
-    # ── Accepted: verificar rol ──
+    # ── Accepted: loading → verificar rol ──
     if custom_id == "accept_punishments":
-        await defer_ephemeral(str(interaction.id), interaction.token)
+        await defer_update(str(interaction.id), interaction.token)
         await asyncio.sleep(1)
 
         has_role = any(role.id == REQUIRED_ROLE_ID for role in interaction.user.roles)
 
         if has_role:
-            await edit_deferred(interaction.token, build_ephemeral_accepted())
+            await edit_original(interaction.token, build_lang_select_payload())
+            await send_followup_ephemeral(
+                interaction.token,
+                "**Punishments Accepted** — You have acknowledged the "
+                "punishment system of **Celestials Dragons**."
+            )
         else:
-            await edit_deferred(interaction.token, {
-                "content": (
-                    "**Rejected** — You do not have the required role "
-                    "to access the punishment system."
-                )
-            })
+            await edit_original(interaction.token, build_accept_payload())
+            await send_followup_ephemeral(
+                interaction.token,
+                "**Rejected** — You do not have the required role "
+                "to access the punishment system."
+            )
 
-    # ── Select de idioma → muestra punishments ──
+    # ── Select de idioma → muestra punishments en el mensaje principal ──
     elif custom_id == "punish_lang_select":
         lang = interaction.data.get("values", ["en"])[0]
         await update_interaction(
             str(interaction.id),
             interaction.token,
-            build_ephemeral_punishment(lang)
+            build_punishment_payload(lang)
         )
 
     # ── Back → regresa a la selección de idiomas ──
@@ -310,7 +328,7 @@ async def on_interaction(interaction: discord.Interaction):
         await update_interaction(
             str(interaction.id),
             interaction.token,
-            build_ephemeral_lang_select()
+            build_lang_select_payload()
         )
 
 
