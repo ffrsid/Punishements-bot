@@ -18,118 +18,118 @@ client = discord.Client(intents=intents)
 
 PUNISHMENTS_CONTENT = {
     "en": (
-        "## ✦ CELESTIALS DRAGONS ┊ SANCTIONS SYSTEM\n"
-        "-# ╰┈ All sanctions are applied based on severity and member history.\n\n"
+        "## ◈ CELESTIALS DRAGONS  ╱  SANCTIONS SYSTEM\n"
+        "-# ╰─ All sanctions are applied based on severity and member history.\n\n"
 
         "**𝐈.  𝗪𝗔𝗥𝗡𝗜𝗡𝗚**\n"
-        "➜ A formal written warning issued by staff.\n"
-        "➜ Warnings are logged and __accumulate__ — **three warnings** escalate automatically to a mute.\n"
-        "➜ Minor or moderate offenses result in a warn.\n"
-        "➜ Sanctions increase in severity with each warn.\n"
-        "➜ Reaching 3 warns = temporary blacklist of 1 month.\n"
-        "╰┈ Regular warns expire after 1 month.\n\n"
+        "▸ A formal written warning issued by staff.\n"
+        "▸ Warnings are logged and __accumulate__ — **three warnings** escalate automatically to a mute.\n"
+        "▸ Minor or moderate offenses result in a warn.\n"
+        "▸ Sanctions increase in severity with each warn.\n"
+        "▸ Reaching 3 warns = temporary blacklist of 1 month.\n"
+        "╰─ Regular warns expire after 1 month.\n\n"
 
         "**𝐈𝐈.  𝗠𝗨𝗧𝗘**\n"
-        "➜ Temporary removal of communication privileges.\n"
-        "╰┈ Duration is determined by staff based on __severity__ and prior history.\n\n"
+        "▸ Temporary removal of communication privileges.\n"
+        "╰─ Duration is determined by staff based on __severity__ and prior history.\n\n"
 
         "**𝐈𝐈𝐈.  𝗧𝗘𝗠𝗣𝗢𝗥𝗔𝗥𝗬 𝗕𝗔𝗡 / 𝗕𝗟𝗔𝗖𝗞𝗟𝗜𝗦𝗧**\n"
-        "➜ Temporary removal from the server.\n"
-        "➜ Applied when a mute has proven __insufficient__ or the offense is of **considerable severity**.\n"
-        "➜ First blacklist → 1 month duration.\n"
-        "➜ Each new blacklist increases until permanent.\n"
-        "╰┈ Can be applied without warns if offense is severe.\n\n"
+        "▸ Temporary removal from the server.\n"
+        "▸ Applied when a mute has proven __insufficient__ or the offense is of **considerable severity**.\n"
+        "▸ First blacklist → 1 month duration.\n"
+        "▸ Each new blacklist increases until permanent.\n"
+        "╰─ Can be applied without warns if offense is severe.\n\n"
 
         "**𝐈𝐕.  𝗣𝗘𝗥𝗠𝗔𝗡𝗘𝗡𝗧 𝗕𝗔𝗡**\n"
-        "➜ Permanent removal from the server with __no appeal__.\n"
-        "╰┈ Reserved for **severe violations** or repeated offenses after all prior sanctions are exhausted.\n\n"
+        "▸ Permanent removal from the server with __no appeal__.\n"
+        "╰─ Reserved for **severe violations** or repeated offenses after all prior sanctions are exhausted.\n\n"
 
-        "**◆ Strict violations ◆**\n"
-        "・ Leaks / Private information sharing\n"
-        "・ Doxxing / Sensitive personal data exposure\n"
-        "・ Grooming / Manipulation toward minors\n"
-        "・ CP Joking / Child abuse references\n"
-        "・ Threats / Harassment / Extortion\n"
-        "╰┈ **These result in immediate permanent action. No exceptions.**\n\n"
+        "**— Strict violations —**\n"
+        "› Leaks / Private information sharing\n"
+        "› Doxxing / Sensitive personal data exposure\n"
+        "› Grooming / Manipulation toward minors\n"
+        "› CP Joking / Child abuse references\n"
+        "› Threats / Harassment / Extortion\n"
+        "╰─ **These result in immediate permanent action. No exceptions.**\n\n"
 
-        "-# ➜ Please review the rules for more information.\n"
-        "-# ╰┈ Celestials Dragons  ·  Punishments"
+        "-# ▸ Please review the rules for more information.\n"
+        "-# ╰─ Celestials Dragons  ·  Punishments"
     ),
     "es": (
-        "## ✦ CELESTIALS DRAGONS ┊ SISTEMA DE SANCIONES\n"
-        "-# ╰┈ Todas las sanciones se aplican según la gravedad y el historial del miembro.\n\n"
+        "## ◈ CELESTIALS DRAGONS  ╱  SISTEMA DE SANCIONES\n"
+        "-# ╰─ Todas las sanciones se aplican según la gravedad y el historial del miembro.\n\n"
 
         "**𝐈.  𝗔𝗗𝗩𝗘𝗥𝗧𝗘𝗡𝗖𝗜𝗔**\n"
-        "➜ Una advertencia formal emitida por el staff.\n"
-        "➜ Las advertencias se registran y __acumulan__ — **tres advertencias** escalan automáticamente a un mute.\n"
-        "➜ Las infracciones menores o moderadas resultan en una advertencia.\n"
-        "➜ Las sanciones aumentan en gravedad con cada advertencia.\n"
-        "➜ Alcanzar 3 advertencias = blacklist temporal de 1 mes.\n"
-        "╰┈ Las advertencias regulares expiran después de 1 mes.\n\n"
+        "▸ Una advertencia formal emitida por el staff.\n"
+        "▸ Las advertencias se registran y __acumulan__ — **tres advertencias** escalan automáticamente a un mute.\n"
+        "▸ Las infracciones menores o moderadas resultan en una advertencia.\n"
+        "▸ Las sanciones aumentan en gravedad con cada advertencia.\n"
+        "▸ Alcanzar 3 advertencias = blacklist temporal de 1 mes.\n"
+        "╰─ Las advertencias regulares expiran después de 1 mes.\n\n"
 
         "**𝐈𝐈.  𝗠𝗨𝗧𝗘**\n"
-        "➜ Eliminación temporal de privilegios de comunicación.\n"
-        "╰┈ La duración es determinada por el staff según la __gravedad__ e historial previo.\n\n"
+        "▸ Eliminación temporal de privilegios de comunicación.\n"
+        "╰─ La duración es determinada por el staff según la __gravedad__ e historial previo.\n\n"
 
         "**𝐈𝐈𝐈.  𝗕𝗔𝗡 𝗧𝗘𝗠𝗣𝗢𝗥𝗔𝗟 / 𝗕𝗟𝗔𝗖𝗞𝗟𝗜𝗦𝗧**\n"
-        "➜ Expulsión temporal del servidor.\n"
-        "➜ Se aplica cuando el mute ha sido __insuficiente__ o la infracción es de **gravedad considerable**.\n"
-        "➜ Primera blacklist → 1 mes de duración.\n"
-        "➜ Cada nueva blacklist incrementa hasta ser permanente.\n"
-        "╰┈ Puede aplicarse sin advertencias si la infracción es grave.\n\n"
+        "▸ Expulsión temporal del servidor.\n"
+        "▸ Se aplica cuando el mute ha sido __insuficiente__ o la infracción es de **gravedad considerable**.\n"
+        "▸ Primera blacklist → 1 mes de duración.\n"
+        "▸ Cada nueva blacklist incrementa hasta ser permanente.\n"
+        "╰─ Puede aplicarse sin advertencias si la infracción es grave.\n\n"
 
         "**𝐈𝐕.  𝗕𝗔𝗡 𝗣𝗘𝗥𝗠𝗔𝗡𝗘𝗡𝗧𝗘**\n"
-        "➜ Expulsión permanente del servidor __sin apelación__.\n"
-        "╰┈ Reservado para **violaciones graves** o infracciones repetidas tras agotar todas las sanciones previas.\n\n"
+        "▸ Expulsión permanente del servidor __sin apelación__.\n"
+        "╰─ Reservado para **violaciones graves** o infracciones repetidas tras agotar todas las sanciones previas.\n\n"
 
-        "**◆ Violaciones estrictas ◆**\n"
-        "・ Filtraciones / Compartir información privada\n"
-        "・ Doxxing / Exposición de datos personales sensibles\n"
-        "・ Grooming / Manipulación hacia menores\n"
-        "・ Bromas sobre CP / Referencias a abuso infantil\n"
-        "・ Amenazas / Acoso / Extorsión\n"
-        "╰┈ **Resultan en acción permanente inmediata. Sin excepciones.**\n\n"
+        "**— Violaciones estrictas —**\n"
+        "› Filtraciones / Compartir información privada\n"
+        "› Doxxing / Exposición de datos personales sensibles\n"
+        "› Grooming / Manipulación hacia menores\n"
+        "› Bromas sobre CP / Referencias a abuso infantil\n"
+        "› Amenazas / Acoso / Extorsión\n"
+        "╰─ **Resultan en acción permanente inmediata. Sin excepciones.**\n\n"
 
-        "-# ➜ Revisa las reglas para más información.\n"
-        "-# ╰┈ Celestials Dragons  ·  Punishments"
+        "-# ▸ Revisa las reglas para más información.\n"
+        "-# ╰─ Celestials Dragons  ·  Punishments"
     ),
     "pt": (
-        "## ✦ CELESTIALS DRAGONS ┊ SISTEMA DE SANÇÕES\n"
-        "-# ╰┈ Todas as sanções são aplicadas com base na gravidade e no histórico do membro.\n\n"
+        "## ◈ CELESTIALS DRAGONS  ╱  SISTEMA DE SANÇÕES\n"
+        "-# ╰─ Todas as sanções são aplicadas com base na gravidade e no histórico do membro.\n\n"
 
         "**𝐈.  𝗔𝗩𝗜𝗦𝗢**\n"
-        "➜ Um aviso formal emitido pela staff.\n"
-        "➜ Os avisos são registrados e __acumulam__ — **três avisos** escalam automaticamente para um mute.\n"
-        "➜ Infrações menores ou moderadas resultam em um aviso.\n"
-        "➜ As sanções aumentam em gravidade com cada aviso.\n"
-        "➜ Atingir 3 avisos = blacklist temporária de 1 mês.\n"
-        "╰┈ Avisos regulares expiram após 1 mês.\n\n"
+        "▸ Um aviso formal emitido pela staff.\n"
+        "▸ Os avisos são registrados e __acumulam__ — **três avisos** escalam automaticamente para um mute.\n"
+        "▸ Infrações menores ou moderadas resultam em um aviso.\n"
+        "▸ As sanções aumentam em gravidade com cada aviso.\n"
+        "▸ Atingir 3 avisos = blacklist temporária de 1 mês.\n"
+        "╰─ Avisos regulares expiram após 1 mês.\n\n"
 
         "**𝐈𝐈.  𝗠𝗨𝗧𝗘**\n"
-        "➜ Remoção temporária dos privilégios de comunicação.\n"
-        "╰┈ A duração é determinada pela staff com base na __gravidade__ e no histórico anterior.\n\n"
+        "▸ Remoção temporária dos privilégios de comunicação.\n"
+        "╰─ A duração é determinada pela staff com base na __gravidade__ e no histórico anterior.\n\n"
 
         "**𝐈𝐈𝐈.  𝗕𝗔𝗡 𝗧𝗘𝗠𝗣𝗢𝗥𝗔𝗥𝗜𝗢 / 𝗕𝗟𝗔𝗖𝗞𝗟𝗜𝗦𝗧**\n"
-        "➜ Remoção temporária do servidor.\n"
-        "➜ Aplicado quando o mute foi __insuficiente__ ou a infração é de **gravidade considerável**.\n"
-        "➜ Primeira blacklist → 1 mês de duração.\n"
-        "➜ Cada nova blacklist aumenta até ser permanente.\n"
-        "╰┈ Pode ser aplicada sem avisos se a infração for grave.\n\n"
+        "▸ Remoção temporária do servidor.\n"
+        "▸ Aplicado quando o mute foi __insuficiente__ ou a infração é de **gravidade considerável**.\n"
+        "▸ Primeira blacklist → 1 mês de duração.\n"
+        "▸ Cada nova blacklist aumenta até ser permanente.\n"
+        "╰─ Pode ser aplicada sem avisos se a infração for grave.\n\n"
 
         "**𝐈𝐕.  𝗕𝗔𝗡 𝗣𝗘𝗥𝗠𝗔𝗡𝗘𝗡𝗧𝗘**\n"
-        "➜ Remoção permanente do servidor sem __apelação__.\n"
-        "╰┈ Reservado para **violações graves** ou infrações repetidas após o esgotamento de todas as sanções.\n\n"
+        "▸ Remoção permanente do servidor sem __apelação__.\n"
+        "╰─ Reservado para **violações graves** ou infrações repetidas após o esgotamento de todas as sanções.\n\n"
 
-        "**◆ Violações estritas ◆**\n"
-        "・ Vazamentos / Compartilhamento de informações privadas\n"
-        "・ Doxxing / Exposição de dados pessoais sensíveis\n"
-        "・ Grooming / Manipulação de menores\n"
-        "・ Piadas sobre CP / Referências a abuso infantil\n"
-        "・ Ameaças / Assédio / Extorsão\n"
-        "╰┈ **Resultam em ação permanente imediata. Sem exceções.**\n\n"
+        "**— Violações estritas —**\n"
+        "› Vazamentos / Compartilhamento de informações privadas\n"
+        "› Doxxing / Exposição de dados pessoais sensíveis\n"
+        "› Grooming / Manipulação de menores\n"
+        "› Piadas sobre CP / Referências a abuso infantil\n"
+        "› Ameaças / Assédio / Extorsão\n"
+        "╰─ **Resultam em ação permanente imediata. Sem exceções.**\n\n"
 
-        "-# ➜ Revise as regras para mais informações.\n"
-        "-# ╰┈ Celestials Dragons  ·  Punishments"
+        "-# ▸ Revise as regras para mais informações.\n"
+        "-# ╰─ Celestials Dragons  ·  Punishments"
     ),
 }
 
@@ -169,9 +169,9 @@ def build_accept_payload() -> dict:
                     {
                         "type": 10,
                         "content": (
-                            "➜ By accepting, you acknowledge that you have read and understood "
+                            "▸ By accepting, you acknowledge that you have read and understood "
                             "the punishment system of **Celestials Dragons**.\n"
-                            "╰┈ Violations will result in the sanctions described — "
+                            "╰─ Violations will result in the sanctions described — "
                             "ignorance is __not__ an excuse."
                         )
                     },
@@ -181,7 +181,7 @@ def build_accept_payload() -> dict:
                         "components": [
                             {
                                 "type": 10,
-                                "content": "-# ╰┈ Tap to confirm you understand."
+                                "content": "-# ╰─ Tap to confirm you understand."
                             }
                         ],
                         "accessory": {
@@ -208,14 +208,14 @@ def build_lang_select_payload() -> dict:
                     {
                         "type": 10,
                         "content": (
-                            "➜ Choose your language to view the punishment system.\n"
-                            "╰┈ The content will be shown below."
+                            "▸ Choose your language to view the punishment system.\n"
+                            "╰─ The content will be shown below."
                         )
                     },
                     {"type": 14, "divider": True, "spacing": 1},
                     {
                         "type": 10,
-                        "content": "-# ╰┈ Select your language below."
+                        "content": "-# ╰─ Select your language below."
                     }
                 ]
             },
@@ -355,14 +355,14 @@ async def on_interaction(interaction: discord.Interaction):
             await edit_original(interaction.token, build_lang_select_payload())
             await send_followup_ephemeral(
                 interaction.token,
-                "✦ **Punishments Accepted** — You have acknowledged the "
+                "◈ **Punishments Accepted** — You have acknowledged the "
                 "punishment system of **Celestials Dragons**."
             )
         else:
             await edit_original(interaction.token, build_accept_payload())
             await send_followup_ephemeral(
                 interaction.token,
-                "➜ **Rejected** — You do not have the required role "
+                "▸ **Rejected** — You do not have the required role "
                 "to access the punishment system."
             )
 
