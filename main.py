@@ -7,6 +7,7 @@ TOKEN = os.environ["DISCORD_TOKEN"]
 APPLICATION_ID = int(os.environ.get("APPLICATION_ID", "0"))
 CHANNEL_PUNISHMENTS = 1497364541024112720
 REQUIRED_ROLE_ID = 1497010109824499923
+ALLOWED_ROLES = {1497009109101183107}  # Co-Owner (agregá más IDs acá si hace falta)
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -329,13 +330,19 @@ async def on_ready():
     print(f"[ONLINE] {client.user} listo")
 
 
+def has_permission(member: discord.Member) -> bool:
+    if member.guild_permissions.administrator:
+        return True
+    return any(role.id in ALLOWED_ROLES for role in member.roles)
+
+
 @client.event
 async def on_message(message: discord.Message):
     if message.author.bot:
         return
     if message.content.strip() == ">setuppunishments":
-        if not message.author.guild_permissions.administrator:
-            await message.reply("❌ No tenés permisos de administrador.", delete_after=5)
+        if not has_permission(message.author):
+            err = await message.reply("❌ No tenés permisos para usar este comando.", delete_after=5)
             return
         try:
             await message.delete()
