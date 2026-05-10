@@ -276,8 +276,10 @@ async def send_v2(channel_id: int, payload: dict):
             if resp.status not in (200, 201):
                 text = await resp.text()
                 print(f"[ERROR send] {resp.status}: {text}")
+                return f"{resp.status}: {text[:300]}"
             else:
                 print("[OK] Mensaje enviado")
+                return None
 
 
 async def defer_update(interaction_id: str, token: str):
@@ -333,9 +335,17 @@ async def on_message(message: discord.Message):
         return
     if message.content.strip() == ">setuppunishments":
         if not message.author.guild_permissions.administrator:
+            await message.reply("❌ No tenés permisos de administrador.", delete_after=5)
             return
-        await message.delete()
-        await send_v2(CHANNEL_PUNISHMENTS, build_accept_payload())
+        try:
+            await message.delete()
+        except Exception as e:
+            print(f"[WARN] No se pudo borrar el mensaje: {e}")
+
+        error = await send_v2(CHANNEL_PUNISHMENTS, build_accept_payload())
+        if error:
+            err_msg = await message.channel.send(f"❌ **Error al enviar el mensaje:**\n```{error}```")
+            await err_msg.delete(delay=15)
 
 
 @client.event
